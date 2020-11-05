@@ -11,11 +11,10 @@ public class AnalyticsCounter {
 	
 	public static void main(String args[]) throws Exception {
 		
-		File filepath = new File("symptoms.txt");
+	File filepath = new File("symptoms.txt");
 		
 		List<String> results = new ArrayList<String>();
-									
-				
+													
 		if (filepath != null) {
 			try {
 				BufferedReader reader = new BufferedReader (new FileReader(filepath));
@@ -38,14 +37,24 @@ public class AnalyticsCounter {
 		Set singleSymptoms = new TreeSet(results);
 		
 		
-		Map<String, Integer> symptomFrequency = new HashMap<String, Integer>();
+		Map<String, Integer> symptomFrequency = new TreeMap<String, Integer>();
 		
 
 		for (Object s : singleSymptoms) {
 			String k = s.toString();
-			System.out.println(k);
+			int v = 0;
+			for (String occ : results) {
+				if (occ.equals(k)) {
+					v += 1;
+				} else {
+					v += 0;
+				}
+			}
+			symptomFrequency.put(k,v);
 
 		}
+		
+		System.out.println(symptomFrequency);
 		
 	}
 
