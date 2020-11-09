@@ -11,13 +11,22 @@ import java.util.*;
 
 public class AnalyticsCounter {
 	
+	static File allsymptoms = new File("symptoms.txt");
+	static File output = new File("results.out");
+	static List<String> results = new ArrayList<String>();
+	static Set<String> singleSymptoms = new HashSet<String>();
+	static Map<String, Integer> symptomFrequency = new TreeMap<String, Integer>();
+	
 	public static void main(String args[]) throws Exception {
 
-		File filepath = new File("symptoms.txt");
-		File output = new File("results.out");
-		List<String> results = new ArrayList<String>();
-		Map<String, Integer> symptomFrequency = new TreeMap<String, Integer>();
-													
+		results = ReadSymptomDataFromFile(allsymptoms);
+		singleSymptoms = new HashSet<String>(results);	
+		SymptomCounter();
+		WriteSymptomCountInFile(symptomFrequency, output);
+		
+	}
+
+	public static List<String> ReadSymptomDataFromFile(File filepath){
 		if (filepath != null) {
 			try {
 				BufferedReader reader = new BufferedReader (new FileReader(filepath));
@@ -31,9 +40,10 @@ public class AnalyticsCounter {
 				e.printStackTrace();
 			}
 		}	
-		
-		Set<String> singleSymptoms = new HashSet<String>(results);
+		return results;
+	}
 	
+	public static void SymptomCounter(){
 		for (Object s : singleSymptoms) {
 			String k = s.toString();
 			int v = 0;
@@ -45,12 +55,14 @@ public class AnalyticsCounter {
 				}
 			}
 			symptomFrequency.put(k,v);
-		}
-		
-		if (symptomFrequency != null) {
+		}	
+	}
+	
+	public static void WriteSymptomCountInFile(Map<String, Integer> freq, File out) {
+		if (freq != null) {
 			try {
-				BufferedWriter writer = new BufferedWriter (new FileWriter(output));
-				for (Map.Entry<String, Integer> entry : symptomFrequency.entrySet()) {
+				BufferedWriter writer = new BufferedWriter (new FileWriter(out));
+				for (Map.Entry<String, Integer> entry : freq.entrySet()) {
 					String line = entry.getKey() + " : " + entry.getValue();
 					writer.write(line);
 					writer.write(System.getProperty("line.separator"));
@@ -60,11 +72,7 @@ public class AnalyticsCounter {
 				e.printStackTrace();
 			}
 		}	
-		
-		
-		
 	}
-
 
 }
 
