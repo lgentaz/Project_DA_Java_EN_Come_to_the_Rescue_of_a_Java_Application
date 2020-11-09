@@ -1,5 +1,6 @@
 package com.hemebiotech.analytics;
 
+import java.lang.Exception;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -12,8 +13,6 @@ public class AnalyticsCounter {
 	
 	public static void main(String args[]) throws Exception {
 
-		
-		//Creating 
 		File filepath = new File("symptoms.txt");
 		File output = new File("results.out");
 		List<String> results = new ArrayList<String>();
@@ -54,7 +53,7 @@ public class AnalyticsCounter {
 				for (Map.Entry<String, Integer> entry : symptomFrequency.entrySet()) {
 					String line = entry.getKey() + " : " + entry.getValue();
 					writer.write(line);
-					writer.write(System.getProperty( "line.separator" ));
+					writer.write(System.getProperty("line.separator"));
 				}
 				writer.close();
 			} catch (IOException e) {
