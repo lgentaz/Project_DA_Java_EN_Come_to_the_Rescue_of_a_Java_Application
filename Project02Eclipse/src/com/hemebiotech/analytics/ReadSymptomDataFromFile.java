@@ -12,15 +12,21 @@ import java.util.List;
  *
  */
 
-public class ReadSymptomDataFromFile {
+public class ReadSymptomDataFromFile implements ISymptomReader {
 	
+	private String filepath;
+
 	/**
 	 * 
 	 * @param filepath a full or partial path to file with symptom strings in it, one per line
 	 */
 	
-	public ReadSymptomDataFromFile(final String filepath) {
+	public ReadSymptomDataFromFile(String filepath) {
+		this.filepath = filepath;
+	}
 
+  @Override
+  public List<String> GetSymptoms() {
 		List<String> result = new ArrayList<String>();
 		
 		if (filepath != null) {
@@ -38,5 +44,6 @@ public class ReadSymptomDataFromFile {
 			}
 		}
 		Collections.sort(result);
+		return result;
 	}
 }
