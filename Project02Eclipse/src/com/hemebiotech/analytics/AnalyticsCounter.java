@@ -16,6 +16,21 @@ public class AnalyticsCounter {
 	static List<String> results = new ArrayList<String>();
 	static Set<String> singleSymptoms = new HashSet<String>();
 	static Map<String, Integer> symptomFrequency = new TreeMap<String, Integer>();
+
+	/**
+	 * 
+	 * Reads the file containing the raw list of symptoms and creates an organized output of alphabetically listed symptoms and their frequencies
+	 * 
+	 * @param results
+	 * 			Every symptoms demonstrated, lists every single item retrieved from the initial file
+ 	 * @param allsymptoms
+ 			Address of the file containing the symptom list to extract 
+	 * @param singleSymptoms
+	 * 			Lists once each type of symptom demonstrated by patients
+	 * @see ReadSymptomDataFromFile
+	 * @see SymptomCounter
+	 * @see WriteSymptomCountInFile
+	 */
 	
 	public static void main(String args[]) throws Exception {
 
@@ -26,6 +41,17 @@ public class AnalyticsCounter {
 		
 	}
 
+	/**
+	 * 
+	 * Reads the file containing the symptoms recorded and retrieves them in an array list
+	 * 
+	 * @param filepath
+	 * 			Address of the file containing the symptom list to extract 
+	 * @return results
+	 *			List containing every symptom retrieved from the initial file
+	 * 			
+	 */
+	
 	public static List<String> ReadSymptomDataFromFile(File filepath){
 		if (filepath != null) {
 			try {
@@ -43,20 +69,34 @@ public class AnalyticsCounter {
 		return results;
 	}
 	
+	/**
+	 * 
+	 * Enumerates the symptoms and counts the frequency at which they occur in the recorded list 
+	 * @return symptomFrequency
+	 * 			Dictionary associating each symptom to its occurrence frequency in the original file
+	 */
+	
 	public static void SymptomCounter(){
 		for (Object s : singleSymptoms) {
 			String k = s.toString();
 			int v = 0;
 			for (String occ : results) {
-				if (occ.equals(k)) {
-					v += 1;
-				} else {
-					v += 0;
-				}
+				int match = occ.equals(k)? 1 : 0;
+				v+=match;
 			}
 			symptomFrequency.put(k,v);
 		}	
 	}
+	
+	/**
+	 * 
+	 * Writes the various symptoms and their frequencies into an output file
+	 * 
+	 * @param out
+	 * 			Address of the file in which are written the symptoms and their frequency  
+	 * @param freq
+	 * 			Dictionary associating each symptom to its occurrence frequency in the original file 
+	 */
 	
 	public static void WriteSymptomCountInFile(Map<String, Integer> freq, File out) {
 		if (freq != null) {
