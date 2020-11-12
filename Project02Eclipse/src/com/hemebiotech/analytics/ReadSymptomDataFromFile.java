@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
  * Simple brute force implementation
@@ -16,18 +17,28 @@ import java.io.File;
 public class ReadSymptomDataFromFile implements ISymptomReader {
 	
 	private File filepath;
-
+	
 	/**
 	 * 
 	 * @param filepath a full or partial path to file with symptom strings in it, one per line
 	 */
 	
-	public ReadSymptomDataFromFile(File filepath) {
-		this.filepath = filepath;
+	public ReadSymptomDataFromFile(File path) {
+		this.filepath = path;
 	}
 
-  @Override
-  public List<String> GetSymptoms() {
+	/**
+	 * 
+	 * Reads the file containing the symptoms recorded and retrieves them in an array list
+	 * 
+	 * @return result
+	 *			Every symptoms demonstrated, lists every single item retrieved from the initial file
+	 * @see ???
+	 * 			
+	 */
+	
+	@Override
+	public List<String> GetSymptoms() {
 		List<String> result = new ArrayList<String>();
 		
 		if (filepath != null) {
@@ -40,9 +51,13 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 					line = reader.readLine();
 				}
 				reader.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		} else {
+			System.out.println("No filepath given.");
 		}
 		Collections.sort(result);
 		return result;
