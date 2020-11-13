@@ -14,6 +14,12 @@ public class WriteSymptomCountInFile {
 	
 	private File filepath;
 
+	/**
+	 * Retrieves the filepath.
+	 * 
+	 * @param filepath a full or partial path to file.
+	 */
+	
 	public WriteSymptomCountInFile(File path) {
 		this.filepath = path;
 	}
@@ -30,7 +36,7 @@ public class WriteSymptomCountInFile {
 	 * 
 	 */
   
-	public void CreateOutput(Map <String, Integer>freq) {
+	public void createOutput(Map <String, Integer>freq) {
 		if (filepath != null) {
 			try {
 				BufferedWriter writer = new BufferedWriter (new FileWriter(filepath));

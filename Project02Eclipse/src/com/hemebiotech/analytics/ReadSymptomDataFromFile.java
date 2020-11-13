@@ -9,18 +9,15 @@ import java.util.List;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-/**
- * Simple brute force implementation
- *
- */
 
 public class ReadSymptomDataFromFile implements ISymptomReader {
 	
 	private File filepath;
 	
 	/**
+	 * Retrieves the filepath.
 	 * 
-	 * @param filepath a full or partial path to file with symptom strings in it, one per line
+	 * @param filepath a full or partial path to file.
 	 */
 	
 	public ReadSymptomDataFromFile(File path) {
@@ -29,16 +26,16 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 
 	/**
 	 * 
-	 * Reads the file containing the symptoms recorded and retrieves them in an array list
+	 * Reads each recorded symptoms from file (one per line) and records them in an array list "result".
 	 * 
 	 * @return result
 	 *			Every symptoms demonstrated, lists every single item retrieved from the initial file
-	 * @see ???
+	 * @see main
 	 * 			
 	 */
 	
 	@Override
-	public List<String> GetSymptoms() {
+	public List<String> getSymptoms() {
 		List<String> result = new ArrayList<String>();
 		
 		if (filepath != null) {

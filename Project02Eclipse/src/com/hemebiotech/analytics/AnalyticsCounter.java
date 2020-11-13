@@ -44,16 +44,23 @@ public class AnalyticsCounter {
  			Address of the file containing the symptom list to extract 
 	 * @param singleSymptoms
 	 * 			Lists once each type of symptom demonstrated by patients
+	 * @param symptomFrequency
+	 * 			Dictionary associating each symptom to its occurrence frequency in the original file
+	 * @see ReadSymptomDataFromFile
+	 * @see getSymptoms
+	 * @see SymptomFrequencyCounter
+	 * @see WriteSymptomCountInFile
+	 * @see getFrequency
 	 */
 	
 	public static void main(String args[]){
 		
 		ReadSymptomDataFromFile in = new ReadSymptomDataFromFile(allsymptoms);
-		List<String> results = in.GetSymptoms();
+		List<String> results = in.getSymptoms();
 		Set<String> singleSymptoms = new HashSet<String>(results);	
 		SymptomFrequencyCounter symptomFrequency = new SymptomFrequencyCounter(singleSymptoms,results);
 		WriteSymptomCountInFile out = new WriteSymptomCountInFile(output);
-		out.CreateOutput(symptomFrequency.GetFrequency());
+		out.createOutput(symptomFrequency.getFrequency());
 		
 	}
 
