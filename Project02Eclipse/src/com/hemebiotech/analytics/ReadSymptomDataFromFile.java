@@ -3,9 +3,7 @@ package com.hemebiotech.analytics;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -13,6 +11,7 @@ import java.io.FileNotFoundException;
 public class ReadSymptomDataFromFile implements ISymptomReader {
 	
 	private File filepath;
+	private List<String> result = new ArrayList<String>();
 	
 	/**
 	 * Retrieves the filepath.
@@ -36,7 +35,6 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	
 	@Override
 	public List<String> getSymptoms() {
-		List<String> result = new ArrayList<String>();
 		
 		if (filepath != null) {
 			try {
@@ -54,7 +52,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 				e.printStackTrace();
 			}
 		} else {
-			System.out.println("No filepath given.");
+			System.out.println("Please enter correct filepath.");
 		}
 		Collections.sort(result);
 		return result;

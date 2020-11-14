@@ -1,5 +1,6 @@
 package com.hemebiotech.analytics;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -7,13 +8,13 @@ import java.util.Set;
 
 public class SymptomFrequencyCounter {
 	
-	
 	private Map<String, Integer> frequency = new TreeMap<String, Integer>();
-	
+	private Set<String> singleSymptoms;	
+
 	/**
 	 * 
 	 * Enumerates the symptoms and counts the frequency at which they occur in the recorded list 
-	 * @param singles
+	 * @param singlesSymptoms
 	 * 			Lists once each type of symptom demonstrated by patients
 	 * @param res
 	 * 			Every symptoms demonstrated, lists every single item retrieved from the initial file
@@ -24,8 +25,9 @@ public class SymptomFrequencyCounter {
 	 * 
 	 */	
 	
-	public SymptomFrequencyCounter(Set<String> singles, List<String> res){	
-		for (Object s : singles) {
+	public SymptomFrequencyCounter(List<String> res){	
+		this.singleSymptoms = new HashSet<String>(res);
+		for (Object s : singleSymptoms) {
 			String k = s.toString();
 			int v = 0;
 			for (String occ : res) {
@@ -38,13 +40,14 @@ public class SymptomFrequencyCounter {
 	
 	/**
 	 * 
-	 * Enumerates the symptoms and counts the frequency at which they occur in the recorded list 
+	 * Returns the symptom occurrences 
 	 * @return frequency
 	 * @see SymptomFrequencyCounter
 	 * @see main
 	 * 
 	 */	
+
 	public Map<String, Integer> getFrequency(){
-		return this.frequency;
+		return frequency;
 	}
 }

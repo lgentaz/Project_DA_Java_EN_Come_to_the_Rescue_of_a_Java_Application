@@ -1,14 +1,7 @@
 package com.hemebiotech.analytics;
 
-import java.lang.Exception;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
-
 
 /**
  * <b> AnalyticsCounter is a class organizing the symptoms felt by the patient into a comprehensive and ordered frequency list</b>
@@ -28,7 +21,6 @@ import java.util.*;
  * @author lgentaz
  */
 
-
 public class AnalyticsCounter {
 	
 	static File allsymptoms = new File("symptoms.txt");
@@ -42,8 +34,6 @@ public class AnalyticsCounter {
 	 * 			Every symptoms demonstrated, lists every single item retrieved from the initial file
  	 * @param allsymptoms
  			Address of the file containing the symptom list to extract 
-	 * @param singleSymptoms
-	 * 			Lists once each type of symptom demonstrated by patients
 	 * @param symptomFrequency
 	 * 			Dictionary associating each symptom to its occurrence frequency in the original file
 	 * @see ReadSymptomDataFromFile
@@ -57,13 +47,11 @@ public class AnalyticsCounter {
 		
 		ReadSymptomDataFromFile in = new ReadSymptomDataFromFile(allsymptoms);
 		List<String> results = in.getSymptoms();
-		Set<String> singleSymptoms = new HashSet<String>(results);	
-		SymptomFrequencyCounter symptomFrequency = new SymptomFrequencyCounter(singleSymptoms,results);
+		SymptomFrequencyCounter symptomFrequency = new SymptomFrequencyCounter(results);
 		WriteSymptomCountInFile out = new WriteSymptomCountInFile(output);
 		out.createOutput(symptomFrequency.getFrequency());
 		
 	}
-
 }
 
 
