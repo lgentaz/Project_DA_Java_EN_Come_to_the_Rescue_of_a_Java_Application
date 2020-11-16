@@ -5,12 +5,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class WriteSymptomCountInFile {
+public class WriteSymptomCountInFile implements IOccurrenceWriter {
 	
 	private File filepath;
 
@@ -36,6 +33,7 @@ public class WriteSymptomCountInFile {
 	 * 
 	 */
   
+	@Override
 	public void createOutput(Map <String, Integer>freq) {
 		if (filepath != null) {
 			try {
