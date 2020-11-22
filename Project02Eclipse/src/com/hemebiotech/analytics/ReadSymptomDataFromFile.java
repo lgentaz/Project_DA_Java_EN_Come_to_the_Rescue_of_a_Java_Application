@@ -7,16 +7,30 @@ import java.util.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+/**
+ * Reads symptom data from a file
+ * The return value is a list of strings (symptoms) with some possible duplicates.
+ * The list is ordered alphabetically.
+ * 
+ */
 
 public class ReadSymptomDataFromFile implements ISymptomReader {
 	
+	/**
+	 * a full or partial path to file.
+	 */
 	private File filepath;
-	private List<String> result = new ArrayList<String>();
+	
+	/**
+	 * Every symptoms present in the file. It lists every single item retrieved from the initial file, sorted in alphabetical order
+	 */
+	private List<String> results = new ArrayList<String>();
 	
 	/**
 	 * Retrieves the filepath.
 	 * 
-	 * @param filepath a full or partial path to file.
+	 * @param path 
+	 * 		a full or partial path to file.
 	 */
 	
 	public ReadSymptomDataFromFile(File path) {
@@ -24,13 +38,11 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	}
 
 	/**
-	 * 
 	 * Reads each recorded symptoms from file (one per line) and records them in an array list "result".
 	 * 
-	 * @return result
-	 *			Every symptoms demonstrated, lists every single item retrieved from the initial file
-	 * @see main
-	 * 			
+	 * @return results
+	 *			Every symptoms present in the file. It lists every single item retrieved from the initial file, sorted in alphabetical order
+	 * @see AnalyticsCounter
 	 */
 	
 	@Override
@@ -42,7 +54,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 				String line = reader.readLine();
 				
 				while (line != null) {
-					result.add(line);
+					results.add(line);
 					line = reader.readLine();
 				}
 				reader.close();
@@ -54,7 +66,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 		} else {
 			System.out.println("Please enter correct filepath.");
 		}
-		Collections.sort(result);
-		return result;
+		Collections.sort(results);
+		return results;
 	}
 }
