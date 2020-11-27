@@ -49,8 +49,9 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	public List<String> getSymptoms() {
 		
 		if (filepath != null) {
-			//try with resources ==> reader automatially closed after the program is finished with it
-			try (BufferedReader reader = new BufferedReader (new FileReader(filepath))){
+			//try with resources ==> reader automatically closed after the program is finished with it
+			try (FileReader buffreader = new FileReader(filepath);
+				BufferedReader reader = new BufferedReader (buffreader)){
 				String line = reader.readLine();
 				
 				while (line != null) {

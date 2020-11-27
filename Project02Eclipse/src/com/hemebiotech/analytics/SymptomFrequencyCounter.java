@@ -1,10 +1,10 @@
 package com.hemebiotech.analytics;
 
-import java.util.HashSet;
+//import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.Set;
+//import java.util.Set;
 
 /**
  * Parameter given is a list of strings (symptoms), may contain duplicates 
@@ -13,24 +13,14 @@ import java.util.Set;
  * The return object is a map associating symptoms and duplicate count.
  */
 
-public class SymptomFrequencyCounter {
-	
-	/**
-	 * Lists once each type of symptom demonstrated by patients
-	 */
-	
-	private Set<String> singleSymptoms;	
-	
-	/**
-	 * a map associating associating each symptom (String key) to its occurrence frequency (Integer value)
-	 */
+public class SymptomFrequencyCounter implements IFrequencyCount {
 	
 	private Map<String, Integer> frequency = new TreeMap<String, Integer>();
 
 	/**
 	 * 
 	 * Enumerates the symptoms and counts the frequency at which they occur in the recorded list 		
-	 * @param results
+	 * @param symptomList
 	 * 			Every symptoms demonstrated, lists every single item retrieved from the initial file
 	 * @see getFrequency
 	 * @see ReadSymptomDataFromFile
@@ -38,15 +28,14 @@ public class SymptomFrequencyCounter {
 	 * 
 	 */	
 	
-	public SymptomFrequencyCounter(List<String> results){	
-		this.singleSymptoms = new HashSet<String>(results);
-		for (String s : singleSymptoms) {
-			int v = 0;
-			for (String occ : results) {
-				int match = occ.equals(s)? 1 : 0;
-				v+=match;
+	public SymptomFrequencyCounter(List<String> symptomList){	
+		for (String symptom : symptomList) {
+			if (frequency.containsKey(symptom)) {
+				int occurence = frequency.get(symptom) + 1;
+				frequency.replace(symptom, occurence);
+			} else {
+				this.frequency.put(symptom,1);
 			}
-			this.frequency.put(s,v);
 		}
 	}
 	
@@ -60,6 +49,7 @@ public class SymptomFrequencyCounter {
 	 * 
 	 */	
 
+	@Override
 	public Map<String, Integer> getFrequency(){
 		return frequency;
 	}

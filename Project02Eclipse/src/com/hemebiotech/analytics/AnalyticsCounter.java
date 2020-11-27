@@ -42,8 +42,8 @@ public class AnalyticsCounter {
 	public static void main(String args[]){
 		
 		ReadSymptomDataFromFile in = new ReadSymptomDataFromFile(allsymptoms);
-		List<String> results = in.getSymptoms();
-		SymptomFrequencyCounter symptomFrequency = new SymptomFrequencyCounter(results);
+		List<String> symptomList = in.getSymptoms();
+		SymptomFrequencyCounter symptomFrequency = new SymptomFrequencyCounter(symptomList);
 		WriteSymptomCountInFile out = new WriteSymptomCountInFile(output);
 		out.createOutput(symptomFrequency.getFrequency());
 		
