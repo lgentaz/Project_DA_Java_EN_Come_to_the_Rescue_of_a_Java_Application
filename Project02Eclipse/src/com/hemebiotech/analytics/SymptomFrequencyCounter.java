@@ -18,11 +18,13 @@ public class SymptomFrequencyCounter {
 	/**
 	 * Lists once each type of symptom demonstrated by patients
 	 */
+	
 	private Set<String> singleSymptoms;	
 	
 	/**
 	 * a map associating associating each symptom (String key) to its occurrence frequency (Integer value)
 	 */
+	
 	private Map<String, Integer> frequency = new TreeMap<String, Integer>();
 
 	/**

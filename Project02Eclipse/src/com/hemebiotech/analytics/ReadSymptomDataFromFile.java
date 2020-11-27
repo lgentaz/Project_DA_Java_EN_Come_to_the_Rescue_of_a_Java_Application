@@ -49,15 +49,14 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	public List<String> getSymptoms() {
 		
 		if (filepath != null) {
-			try {
-				BufferedReader reader = new BufferedReader (new FileReader(filepath));
+			//try with resources ==> reader automatially closed after the program is finished with it
+			try (BufferedReader reader = new BufferedReader (new FileReader(filepath))){
 				String line = reader.readLine();
 				
 				while (line != null) {
 					results.add(line);
 					line = reader.readLine();
 				}
-				reader.close();
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -66,7 +65,6 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 		} else {
 			System.out.println("Please enter correct filepath.");
 		}
-		Collections.sort(results);
 		return results;
 	}
 }

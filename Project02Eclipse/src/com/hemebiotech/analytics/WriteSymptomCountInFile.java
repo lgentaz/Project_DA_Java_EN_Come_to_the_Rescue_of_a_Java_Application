@@ -46,14 +46,12 @@ public class WriteSymptomCountInFile implements IOccurrenceWriter {
 	@Override
 	public void createOutput(Map <String, Integer>frequency) {
 		if (filepath != null) {
-			try {
-				BufferedWriter writer = new BufferedWriter (new FileWriter(filepath));
+			try (BufferedWriter writer = new BufferedWriter (new FileWriter(filepath))){
 				for (Map.Entry<String, Integer> entry : frequency.entrySet()) {
 					String line = entry.getKey() + " : " + entry.getValue();
 					writer.write(line);
 					writer.write(System.getProperty("line.separator"));
 				}
-				writer.close();
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
